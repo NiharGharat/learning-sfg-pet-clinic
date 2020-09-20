@@ -2,3 +2,9 @@ Doc
 - Project setup
     - Web, Data, H2, Mysql, Lombok, Dev tools, Thymeleaf.
 
+- Models(Pojos for now)
+	- Person
+	- Owner
+	- Pet
+	- PetType
+	- Vet
