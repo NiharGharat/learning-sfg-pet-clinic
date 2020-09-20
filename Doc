@@ -19,4 +19,88 @@ Doc
 	- In naming - give artifact co ords
 		- atrifactId - pet-clinic-data
 	- A new Project is created at the sepecified directory - empty one
-	- Now, create another one for web app - pet-clinic-web 
+	- Now, create another one for web app - pet-clinic-web
+	- Now, move mainClass one to web project under java folder - just drag and drop
+	- ANd drag drop the model package into data project under java project
+	- Dependency refra, pulled these dep from main project into following once
+		- Web
+			actuator, test, devtools
+
+		- Data
+			h2, lombok, jpa, mysql, test
+	- Now, after moving them, create correct packages, like they were before - eg Models was in com.nihar.learning.sfgpetclinic, so create this package in both data and web(mainClass from web).
+	- Then, add data module pom name from pet-clinic-data into web to make web dependent on data module.
+		<dependency>
+            <artifactId>pet-clinic-data</artifactId>
+            <groupId>com.nihar.learning</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    => Web
+    	- Test, Actuator, Thymeleaf, Web, DataModule, DevTools
+    => Data
+    	- Test, Devtools, Jpa, MySql, H2, Lombok
+    - Copy <build> module into the data pom from parent, and add params to make data pom look like-
+    	<build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                            <configuration>
+                                <skip>true</skip>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    And in pom
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+    - On pet-clinic parent, maven - clean - done, then package
+    - This will build all 3 modules- data target has jar now.
+    - Essentially, data is a lean jar, and web has that jar.
+    - Move resources as well from parent to web
+    - Move Test of main Class in web
+    - Delete src folder
+
+    - SO, now as it stands, project split into 2
+    	- main pom having modules
+    		- pet-clinic-data -> this will be in <modules> of parent and artifact id of child
+    		- pet-clinic-web
+    	- data and web are differentiated
+    //
+    When you package a Spring Boot application (WEB), it creates a FAT JAR, also known as Uber JAR. It contains all your dependencies and also the embedded Tomcat. So when you run the Fat JAR, Tomcat starts and your application is ready to serve request. Now your data module doesn't need to be a FAT JAR. It should be a traditional JAR that the Web module needs as a dependency. That's why you do <spring-boot.repackage.skip>true</spring-boot.repackage.skip>
+
+    //
+    The project dependency will be there.
+
+	Let's first understand the maven package goal and spring-boot:repackage goal.
+
+	In a SpringBoot application, when you do mvn package, two things happens.
+
+	maven package goal executes and creates a tarditional JAR/WAR archive that you can deploy on a container/server. Any dependencies with provided scope is not included in the archive.
+
+	This is followed by the spring-boot:repackage goal. This will repackage the existing archive to allow it to be launced from the console. For that the goal will  specify the main class and make it executable using an embedded container. The goal will also additionaly package the dependencies even with the provided scope.
+
+	If you look in your target folder, by default, you will find two JARs.
+
+	Re packaging creates new jar file and renames the old one to jar.original
+
+	In the context of the pet-clinic example, as we don't want pet-clinic-data to be launched from console, we specified repackage to be skipped.
+
+    - Look answers here https://www.udemy.com/course/spring-framework-5-beginner-to-guru/learn/lecture/17862522#questions/9485124
