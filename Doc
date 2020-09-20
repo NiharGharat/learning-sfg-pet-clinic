@@ -8,3 +8,15 @@ Doc
 	- Pet
 	- PetType
 	- Vet
+
+	-Q- How to close github issues with commit message - 
+		- Git commit message - my commit msg, Closes #2
+		- This will close number 2 issue
+
+- 48. Multi model build
+	- Ur project - RC - New... - Module
+	- Maven - Next
+	- In naming - give artifact co ords
+		- atrifactId - pet-clinic-data
+	- A new Project is created at the sepecified directory - empty one
+	- Now, create another one for web app - pet-clinic-web 
