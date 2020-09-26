@@ -1,0 +1,94 @@
+- Dependency injection (vid 31)
+	- Clone the repo of sfg-di
+	- Generate simple spring project without any dep.
+	- Import those files into theis single readme cloned project
+	- In pom, add as maven project
+	- Run verify, in lifecycle after project Structure -> Set the java Sdk to 11(12 I did)
+	- Run Verify mvn lifecycle - success
+
+- Application context
+	- Create a controller
+	- To get access to this spring managed bean - Springs main method - run() > ApplicationContext
+	- Can request applicationContext.getBean("myControllerNameCamelCaseStartingLowerCase") -> If it is a spring managed bean - eg @Controller - U get the beans object - cast the Object to req Class
+	- This starts with lower case EVERYTIME
+	- Application context stops as soon as the beans are done init.
+	- Issue - when myController and MyController is in same class - error wont create the context - sol - @Controller("TestDiffName") - and then it works
+	- Can also list all the beans inited as well
+
+- DI
+	- The class being injected has no reponsibility in initing the obj being injected.
+	- U r not creating obj with a new keyword
+		- eg - connection object to a db - h2, mysql, etc. - to keep it generic??
+		- eg - Datasource for db connectivity
+	- DI - by setters - or by constructor inj(preferred)
+	- DI - concrete class - and interface
+	- DI with concrete class shd be avoided
+	- DI via interface is preferred
+		- Runtime to decide - Follows interface segregation - code more testable
+	- 3 ways of DI - by SPRING
+		- Constructor, Setter, and property.
+		- How this was demonstrated 
+			- Create interface with hello()
+			- Create impl - myImpl - hello(sout("Hello"))
+			- Create propCtrl - this is where our code will lie - we want an instance of myImpl
+			- 3 ways -> Just create 3 classes for demonstration
+				- 1 -> Property based
+					- PrpBasedImpl - <This is my actual code>
+						- interface myInterface;
+						- myInterface.hello() -> access it;
+						- Create test -> runtime 
+			<LOOK IN NOTES FOR EXPLANAITION>			
+
+
+
+- IoC(inversion of control)
+	- Spring will inject the objects at runtime - inversion of ctrl??
+	- DI - are coded; IoC - at runtime??
+	- Runtime env injects the dependencies.
+	- U anno ur dependencies - and spring uses IoC to inj ur anno beans??
+
+- Di
+	- Anno @Controller on controller -> now u can get a controller bean from applicationContext
+	- To call a service in controller -> (property) - @Autowired the property in ctrl, and @Service the actual impl
+	- To call a service in ctrl using setter inj - @Autwired the setter - spring will provide the instance of @Service to the setter
+	- For constructor, anno constructor with autowired is optional!!!
+	- Multiple impl of a interface, annotate @Qualifier("myImplBeanNameWithLowerCaseCamel") on the autowired requirement
+		- public myController(@Qualifier("myBeanName") MyServiceIterface interface) -> Constructor inj
+	- primary bean - in times of confusion - sprung will init this bean - annot ur service with @Primary which impl the interface
+
+- Why are we doing all this??
+	- My take - If I have a code with service calls - No where have I written new Service(), not in prop, not in setter, nor in constructor of my main class.(Concrete new () avoided)
+	- This service impl is dynamically put in by spring.
+	- Why wud I need that? - If tomorrow, I need another class impl, I wud just change the name of the bean to inject, without worying abt the concrete class, and it complying with the req or not. This config can be also set in the profile.
+
+- Profile
+	- spring.profiles.active=MyProfileName -> applicaiton.properties
+	- Anno the service beans with @Profile("Prof1"), ... and put that profile in applicaiton.properties
+	- Default @Profile({"ES", "default"}) -> default - no active profile def - use default - on top of bean class @Service eg
+
+- Why are we using DI?? 2
+	- Diff profiles - diff beans to inject and diff behaviour - based on diff env eg
+		- eg messaging - kafka, jms depending on profile.
+
+	- multiple profiles - application.properties -> spring.profiles.active=dog,EN
+
+== To recap
+	- Annotate your service(like) beans with @qualifier, it sort of names them, then u can use that name to get the bean instance
+	- Anno service(Like) beans with @profile -> and application.properties set a profile, that bean will be used
+	- If no profile set, then a default profile one is used
+	- Make sure u set a "default" in the profile
+	- 
+
+- Lifecycle
+	- Look pdf
+	- Callback interfaces for bean lifecycle
+		- InitializingBean, DisposableBean
+	- Beans lifecycle
+		- @PostConstruct
+		- @PreDestroy	
+	- Aware interfaces - rarely used
+		- eg - ApplicationContextAware, BeanFactoryAware, etc. -> Interfaces
+	- If u need to hook into bean pre creation, after init, preDestroy, etc. events - then use the lifecycle interfaces
+
+- NOTE - constructor inj is preferred as it inj bean when class is inited for first time
+- Can inject into provate prop as well, but is not preferred - spring uses reflection at runtime.

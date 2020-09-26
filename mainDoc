@@ -1,0 +1,16 @@
+- SOLID
+	- Single responsibility
+	- Open close principle
+		- Open for extension, close for modification
+		- private vars
+	- Liskov Substitution principle
+		- Objects in a prog wud be replacable with instances of their subTypes without altering the correctness of the program.
+		- eg Square is a rectangle
+	- Interface segregation principle
+		- Many client interfaces
+		- Single interface
+		- No God interface
+		- Very simple interface - avoid general interface
+	- Dependency Inversion principle
+		- Abstraction shd not depend upon details, details shd depend upon abstraction
+		- 
