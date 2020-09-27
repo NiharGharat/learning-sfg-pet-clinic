@@ -40,6 +40,12 @@
         </pluginManagement>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>release</id>
+            <url>git@github.com:NiharGharat/learning-sfg-pet-clinic.git</url>
+        </repository>
+    </distributionManagement>
     <scm>
         <developerConnection>scm:git:git@github.com:NiharGharat/learning-sfg-pet-clinic.git</developerConnection>
       <tag>HEAD</tag>
