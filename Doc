@@ -113,4 +113,7 @@ Doc
         <scm>
         <developerConnection>scm:git:git@github.com:NiharGharat/learning-sfg-pet-clinic.git</developerConnection>
         </scm>
-    - Now, mvn relase:prepare
+    - Now, mvn relase:prepare - make sure u have added the necessary files
+    - ISSUE --
+        -- Stuck at git push the first time - no connection to git
+        -- Add git ssh key to bash
