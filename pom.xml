@@ -23,11 +23,6 @@
         <java.version>11</java.version>
     </properties>
 
-    <dependencies>
-
-
-    </dependencies>
-
     <build>
         <pluginManagement>
             <plugins>
@@ -35,8 +30,19 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <goals>install</goals>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>
+
+    <scm>
+        <developerConnection>scm:git:git@github.com:NiharGharat/learning-sfg-pet-clinic.git</developerConnection>
+    </scm>
 
 </project>

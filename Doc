@@ -28,7 +28,7 @@ Doc
 
 		- Data
 			h2, lombok, jpa, mysql, test
-	- Now, after moving them, create correct packages, like they were before - eg Models was in com.nihar.learning.sfgpetclinic, so create this package in both data and web(mainClass from web).
+	- Now, after moving them, create correct packages, like they were before - eg Models was in com.nihar.learning.sfgpetclinic, so create this package in both data and web(mainClass from web). Notice the empty pckg in main project
 	- Then, add data module pom name from pet-clinic-data into web to make web dependent on data module.
 		<dependency>
             <artifactId>pet-clinic-data</artifactId>
@@ -104,3 +104,13 @@ Doc
 	In the context of the pet-clinic example, as we don't want pet-clinic-data to be launched from console, we specified repackage to be skipped.
 
     - Look answers here https://www.udemy.com/course/spring-framework-5-beginner-to-guru/learn/lecture/17862522#questions/9485124
+
+    49. Release
+    - Add the plugin in parent, the configure the plugin
+    - Default plugin is deploy - change it to install, as we dont wnat it to deply??
+    - Terminal - mvn release:prepare -> Tag versions in scm
+    - Add the scm tag first and then run te command
+        <scm>
+        <developerConnection>scm:git:git@github.com:NiharGharat/learning-sfg-pet-clinic.git</developerConnection>
+        </scm>
+    - Now, mvn relase:prepare
