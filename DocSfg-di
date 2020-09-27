@@ -54,15 +54,22 @@
 	- For constructor, anno constructor with autowired is optional!!!
 	- Multiple impl of a interface, annotate @Qualifier("myImplBeanNameWithLowerCaseCamel") on the autowired requirement
 		- public myController(@Qualifier("myBeanName") MyServiceIterface interface) -> Constructor inj
+		- Qualifier above setter, and above property
+		- The name is the name you are requesting
 	- primary bean - in times of confusion - sprung will init this bean - annot ur service with @Primary which impl the interface
+		- Same lvl of qualifier, when given qualifier is not available as when tehn
 
 - Why are we doing all this??
 	- My take - If I have a code with service calls - No where have I written new Service(), not in prop, not in setter, nor in constructor of my main class.(Concrete new () avoided)
 	- This service impl is dynamically put in by spring.
+	- Which == I am using Dependency inject to inject the dependency, == u compose your classes with DI; and IoC is the runtime env of your code - Spring F/W IoC container - Spring is in control of injection of dep.
+	- Mostly use const injection, use final props for injected components.
+	- Code to an interface.
 	- Why wud I need that? - If tomorrow, I need another class impl, I wud just change the name of the bean to inject, without worying abt the concrete class, and it complying with the req or not. This config can be also set in the profile.
 
 - Profile
-	- spring.profiles.active=MyProfileName -> applicaiton.properties
+	- @Service("myBeanName") -> Two beans with same name - confusion == Use Profile - spring.profiles.active
+	- spring.profiles.active=Prof1 -> applicaiton.properties
 	- Anno the service beans with @Profile("Prof1"), ... and put that profile in applicaiton.properties
 	- Default @Profile({"ES", "default"}) -> default - no active profile def - use default - on top of bean class @Service eg
 
@@ -83,8 +90,8 @@
 	- Look pdf
 	- Callback interfaces for bean lifecycle
 		- InitializingBean, DisposableBean
-	- Beans lifecycle
-		- @PostConstruct
+	- Beans lifecycle hook in methods
+		- @PostConstruct	- before bean is handed out to the requesting object
 		- @PreDestroy	
 	- Aware interfaces - rarely used
 		- eg - ApplicationContextAware, BeanFactoryAware, etc. -> Interfaces
