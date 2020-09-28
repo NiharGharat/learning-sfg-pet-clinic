@@ -117,3 +117,17 @@ Doc
     - ISSUE --
         -- Stuck at git push the first time - no connection to git
         -- Add git ssh key to bash
+    - Unable to do proper maven release, mvn release:prepare works, but not release:perform
+    - Local/dev with shd workd code, mavenReleaseIssueMovingAhead with trial not working.
+    - ISSUE --
+        -- Tag pushed ad then problem
+        -- Delete it at origin - $ git push --delete origin  sfg-pet-clinic-0.0.3
+        -- Add new ssh key to rsa.pub - ref here
+        -- https://www.inmotionhosting.com/support/website/git/how-to-add-ssh-keys-to-your-github-account/
+    - ISSUE --
+        - tag already exists
+        fatal: tag 'sfg-pet-clinic-0.0.1' already exists
+        git tag --delete sfg-pet-clinic-0.0.1
+    - Finally, was successfully able to push the build tag to origin.
+    - Observation - maven itself commits to the scm, and pushes the tag to origin - the version in the poms are as well at 0.0.2 now.
+    - Prepare -> pushed the release to scm.
