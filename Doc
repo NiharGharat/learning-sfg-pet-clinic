@@ -142,3 +142,8 @@ Doc
         - extend all Pet, Owner and Vet interfaces to have this common service, remove common into crudService
         - Just for explanation
 
+    62. Now map service
+    - Dont know wtf here
+
+    63. Thymeleaf
+    - th:text="'Index Page'" -> prints Index Page in html page - space quote it
