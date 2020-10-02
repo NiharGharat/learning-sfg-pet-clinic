@@ -147,3 +147,6 @@ Doc
 
     63. Thymeleaf
     - th:text="'Index Page'" -> prints Index Page in html page - space quote it
+
+    67. OwnerCtrl
+    - RequestMapping on class "/owner" and GetMappping on methods - {"/", "", "/index", "index.html"}
